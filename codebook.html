@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Codebook: CFD loss rates and Crowd Gauge columns</title>
+<meta name="description" content="Column-by-column codebook for TradingLookup's CFD loss-rate files and Crowd Gauge CFTC positioning files: names, types, units and how each value is made.">
+<link rel="canonical" href="https://tradinglookup.github.io/codebook.html">
+<style>
+  :root { --ink: #1b1f24; --muted: #57606a; --line: #d0d7de; --bg: #ffffff; --soft: #f6f8fa; --link: #0b57d0; }
+  @media (prefers-color-scheme: dark) {
+    :root { --ink: #e6edf3; --muted: #9da7b3; --line: #30363d; --bg: #0d1117; --soft: #161b22; --link: #79b8ff; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main, header, footer { max-width: 860px; margin: 0 auto; padding: 0 16px; }
+  header { padding-top: 32px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.25rem; margin: 40px 0 8px; border-bottom: 1px solid var(--line); padding-bottom: 4px; }
+  h3 { font-size: 1.02rem; margin: 24px 0 6px; }
+  a { color: var(--link); }
+  nav a { margin-right: 16px; }
+  .table-wrap { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: var(--soft); }
+  td:first-child { white-space: nowrap; }
+  code { background: var(--soft); padding: 1px 4px; border-radius: 4px; font-size: 0.9em; }
+  footer { color: var(--muted); font-size: 0.85rem; padding-top: 24px; padding-bottom: 40px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Codebook</h1>
+  <p>Every column in the CSV files, with its type and meaning. All files are UTF-8, comma-separated, with a header row. Dates are ISO 8601 (<code>YYYY-MM-DD</code>). Empty cells mean "no value", never zero.</p>
+  <nav><a href="./">Datasets</a><a href="codebook.html">Codebook</a></nav>
+</header>
+
+<main>
+  <h2 id="cfd-live">cfd-loss-rates.csv</h2>
+  <p>One row per CFD provider. Primary key: <code>slug</code>. 31 rows in v1.0.0. The machine-readable schema is in <a href="https://tradinglookup.com/data/cfd-loss-rates.datapackage.json">cfd-loss-rates.datapackage.json</a>.</p>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Column</th><th>Type</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td><code>broker</code></td><td>text</td><td>Brand name as commonly used</td></tr>
+      <tr><td><code>slug</code></td><td>text</td><td>Stable lower-case id; links rows across files</td></tr>
+      <tr><td><code>entity</code></td><td>text</td><td>Legal entity named on the page. Prefixed "Not confirmed:" when the page lists several group companies</td></tr>
+      <tr><td><code>loss_rate_pct</code></td><td>number, 0–100</td><td>Percent of retail accounts losing money, exactly as the provider states it</td></tr>
+      <tr><td><code>warning_text</code></td><td>text</td><td>The full warning sentence, verbatim</td></tr>
+      <tr><td><code>source_url</code></td><td>URL</td><td>Page read, after redirects</td></tr>
+      <tr><td><code>checked_at</code></td><td>date</td><td>Day the page was read</td></tr>
+      <tr><td><code>evidence</code></td><td>text</td><td>SHA-256 of the page text, how it was fetched and from where</td></tr>
+      <tr><td><code>second_read</code></td><td>one of <code>match</code>, <code>changed</code>, <code>not_found</code>, <code>blocked</code>, empty</td><td>Outcome of a separate automated re-read</td></tr>
+      <tr><td><code>second_read_at</code></td><td>date</td><td>Day of the re-read</td></tr>
+      <tr><td><code>second_read_pct</code></td><td>number</td><td>Figure the re-read found; filled only for <code>match</code> or <code>changed</code>. Does not replace <code>loss_rate_pct</code></td></tr>
+      <tr><td><code>second_read_url</code></td><td>URL</td><td>Where the re-read landed</td></tr>
+      <tr><td><code>second_read_evidence</code></td><td>text</td><td>Archive path of the saved text or screenshot, with SHA-256</td></tr>
+      <tr><td><code>second_read_note</code></td><td>text</td><td>Reason a re-read didn't match, where one is needed</td></tr>
+      <tr><td><code>notes</code></td><td>text</td><td>"Regulator: …" from our own list (not yet register-checked), plus caveats</td></tr>
+      <tr><td><code>register_url</code></td><td>URL</td><td>Regulator register entry once checked; empty in v1.0.0</td></tr>
+      <tr><td><code>register_checked_at</code></td><td>date</td><td>Day of the register check; empty in v1.0.0</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2 id="cfd-history">cfd-loss-rates-history.csv</h2>
+  <p>One row per provider per quarter. Primary key: <code>slug</code> + <code>quarter</code>. 404 rows, 18 providers, 2018-Q3 to 2026-Q4. Missing quarters are absent rows, not zeros.</p>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Column</th><th>Type</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td><code>broker</code></td><td>text</td><td>Brand name</td></tr>
+      <tr><td><code>slug</code></td><td>text</td><td>Joins to <code>cfd-loss-rates.csv</code></td></tr>
+      <tr><td><code>entity</code></td><td>text</td><td>Today's entity, not re-read from each archived page</td></tr>
+      <tr><td><code>quarter</code></td><td>text, <code>YYYY-Qn</code></td><td>Calendar quarter of the archive capture</td></tr>
+      <tr><td><code>loss_rate_pct</code></td><td>number, 0–100</td><td>Figure on the archived page</td></tr>
+      <tr><td><code>archive_url</code></td><td>URL</td><td>Internet Archive capture that was read</td></tr>
+      <tr><td><code>warning_text</code></td><td>text</td><td>Warning sentence on the archived page, verbatim</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>How each figure is matched and checked is set out in the <a href="https://tradinglookup.com/brokers/cfd-loss-rates/method/">loss-rate reading method</a>. CFDs carry a high risk of losing money rapidly due to leverage, and most retail CFD accounts lose money.</p>
+
+  <h2 id="cot-obs">crowd-gauge-observations.csv</h2>
+  <p>One row per CFTC contract per weekly report, from 2006. Source: CFTC Commitments of Traders, Legacy, futures only (dataset <code>6dca-aqww</code> on publicreporting.cftc.gov).</p>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Column</th><th>Type</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td><code>leg</code></td><td>text</td><td><code>cftc:</code> plus the CFTC contract market code, e.g. <code>cftc:13874A</code> (E-mini S&amp;P 500)</td></tr>
+      <tr><td><code>market</code></td><td>text</td><td>Market slug, e.g. <code>gold</code>, <code>euro</code>, <code>bitcoin</code>. Bitcoin and ether each have two legs (standard and micro contracts)</td></tr>
+      <tr><td><code>as_of_date</code></td><td>date</td><td>Position date in the report (normally a Tuesday)</td></tr>
+      <tr><td><code>released_date</code></td><td>date</td><td><code>as_of_date</code> + 3 days: the day the value is treated as public. Holiday weeks can slip a day or two in reality</td></tr>
+      <tr><td><code>nonrep_long</code></td><td>integer, contracts</td><td>Non-reportable long positions (CFTC field <code>nonrept_positions_long_all</code>)</td></tr>
+      <tr><td><code>nonrep_short</code></td><td>integer, contracts</td><td>Non-reportable short positions (<code>nonrept_positions_short_all</code>)</td></tr>
+      <tr><td><code>long_share_pct</code></td><td>number, 0–100</td><td><code>nonrep_long / (nonrep_long + nonrep_short) × 100</code></td></tr>
+      <tr><td><code>percentile_156w</code></td><td>number, 0–100</td><td>Percentile rank of <code>long_share_pct</code> within this leg's latest 156 weekly readings, ties counted half. Empty until 52 readings exist</td></tr>
+      <tr><td><code>flow_percentile_156w</code></td><td>number, 0–100</td><td>Percentile rank of the 4-week change in <code>long_share_pct</code>, same window</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2 id="cot-history">crowd-gauge-history.csv</h2>
+  <p>One row per release date per scope. Scopes are the 19 market slugs, the classes <code>futures</code> and <code>crypto</code>, and <code>composite</code>.</p>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Column</th><th>Type</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td><code>date</code></td><td>date</td><td>Release date the reading belongs to</td></tr>
+      <tr><td><code>scope</code></td><td>text</td><td>Market slug, class or <code>composite</code></td></tr>
+      <tr><td><code>value_0_100</code></td><td>number, 0–100</td><td>Market: mean percentile of its live legs. Class: equal-weight mean of its markets. Composite: 50/50 futures and crypto</td></tr>
+      <tr><td><code>band</code></td><td>text</td><td><code>crowded_short</code> (under 20), <code>leaning_short</code> (20–40), <code>balanced</code> (40–60), <code>leaning_long</code> (60–80), <code>crowded_long</code> (80 and over)</td></tr>
+      <tr><td><code>legs</code></td><td>integer</td><td>Inputs averaged: legs for a market, markets for a class, classes for the composite</td></tr>
+      <tr><td><code>method_version</code></td><td>text</td><td>Method that produced the row (<code>1.0</code>). Old rows are never rewritten by a new version</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2 id="fear-greed">crowd-fear-greed-history.csv and crowd-fear-greed-monthly.csv</h2>
+  <p>Per leg, the reading is 0.5 × <code>percentile_156w</code> + 0.5 × <code>flow_percentile_156w</code>; markets average their legs and scopes average their markets. Scopes: <code>crypto</code>, <code>bitcoin</code>, <code>stock-market</code>. Bands: <code>extreme_fear</code> (under 25), <code>fear</code> (25–45), <code>neutral</code> (45–55), <code>greed</code> (55–75), <code>extreme_greed</code> (75 and over). The history file has <code>date, scope, value_0_100, band, markets, method_version</code>. The monthly file has <code>month, scope, last_date, last_value, last_band, mean, low, high, readings, method_version</code>. No price, volatility or news inputs are used.</p>
+
+  <h2 id="json">JSON files</h2>
+  <ul>
+    <li><code>cfd-loss-rates-summary.json</code>: headline median, mean, range, regulator counts, second-read counts, change since earliest archived figure with <code>history_flags</code>, and providers with no readable figure.</li>
+    <li><code>crowd-gauge-latest.json</code>: latest composite, class and market readings with <code>week_ago</code>, <code>year_ago</code>, <code>high_3y</code> and <code>low_3y</code>, plus each leg's raw CFTC numbers and source hash.</li>
+    <li><code>crowd-gauge-backtest.json</code>: the pre-registered test of returns after readings of 80+ or 20 and under, per market and pooled, at 1, 4 and 12 weeks.</li>
+  </ul>
+</main>
+
+<footer>
+  <p>Licence: CC BY 4.0. Credit "TradingLookup" with a link. Codebook checked against the published files on 16 October 2026. Data, not investment advice.</p>
+</footer>
+</body>
+</html>

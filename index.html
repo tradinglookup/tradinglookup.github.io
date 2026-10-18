@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TradingLookup open datasets: CFD loss rates and Crowd Gauge</title>
+<meta name="description" content="Two free CC BY 4.0 datasets: CFD providers' own retail loss-rate disclosures, and a weekly small-trader positioning gauge built from CFTC Commitments of Traders data.">
+<link rel="canonical" href="https://tradinglookup.github.io/">
+<style>
+  :root { --ink: #1b1f24; --muted: #57606a; --line: #d0d7de; --bg: #ffffff; --soft: #f6f8fa; --link: #0b57d0; }
+  @media (prefers-color-scheme: dark) {
+    :root { --ink: #e6edf3; --muted: #9da7b3; --line: #30363d; --bg: #0d1117; --soft: #161b22; --link: #79b8ff; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main, header, footer { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+  header { padding-top: 32px; }
+  h1 { font-size: 1.7rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.25rem; margin: 40px 0 8px; border-bottom: 1px solid var(--line); padding-bottom: 4px; }
+  h3 { font-size: 1.05rem; margin: 24px 0 4px; }
+  p.lede { color: var(--muted); margin-top: 0; }
+  a { color: var(--link); }
+  nav a { margin-right: 16px; }
+  .table-wrap { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.92rem; }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: var(--soft); }
+  code { background: var(--soft); padding: 1px 4px; border-radius: 4px; font-size: 0.9em; }
+  .note { background: var(--soft); border-left: 3px solid var(--line); padding: 8px 12px; }
+  footer { color: var(--muted); font-size: 0.85rem; padding-top: 24px; padding-bottom: 40px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>TradingLookup open datasets</h1>
+  <p class="lede">Plain files, free to reuse under CC BY 4.0. This page is a short index and method note; the files themselves are hosted on tradinglookup.com.</p>
+  <nav><a href="./">Datasets</a><a href="codebook.html">Codebook</a></nav>
+</header>
+
+<main>
+  <p>We publish two datasets that people keep asking for in machine-readable form. The first gathers the loss figures that CFD providers are required to print about their own retail clients. The second turns the US futures regulator's weekly positioning report into a 0 to 100 reading of how heavily small traders lean long or short. Both are rebuilt by scripts from public sources, and every row says where it came from and when.</p>
+
+  <h2 id="cfd">1. CFD loss rates</h2>
+  <p>Firms offering CFDs to retail clients in the UK and EU must state what share of those clients' accounts lost money over the past year. We read that sentence from each provider's own website, from a UK connection, and store it word for word with the date, the page address and a SHA-256 fingerprint of the page text. A second table rebuilds each provider's figure quarter by quarter from Internet Archive captures.</p>
+  <p class="note">CFDs are complex instruments with a high risk of losing money rapidly due to leverage. Most retail CFD accounts lose money; every provider in this file says so about its own clients.</p>
+
+  <h3>What's in it (measured)</h3>
+  <ul>
+    <li>31 providers, read on 6 October 2026, with 7 figures re-read and updated on 13 October 2026.</li>
+    <li>Median stated loss rate 73.46%; lowest 51% (eToro, legal entity not confirmed), highest 84% (Libertex).</li>
+    <li>404 quarterly history figures for 18 providers, 2018-Q3 to 2026-Q4.</li>
+    <li>Version 1.0.0, provisional: an automated second read on 13 October 2026 matched 16 of 31 figures.</li>
+  </ul>
+
+  <h3>Files</h3>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>File</th><th>Format</th><th>Contents</th></tr></thead>
+    <tbody>
+      <tr><td><a href="https://tradinglookup.com/data/cfd-loss-rates.csv">cfd-loss-rates.csv</a></td><td>CSV, 31 rows</td><td>Current figure per provider, with evidence and second-read columns</td></tr>
+      <tr><td><a href="https://tradinglookup.com/data/cfd-loss-rates-history.csv">cfd-loss-rates-history.csv</a></td><td>CSV, 404 rows</td><td>Quarterly figures from archived pages</td></tr>
+      <tr><td><a href="https://tradinglookup.com/data/cfd-loss-rates-summary.json">cfd-loss-rates-summary.json</a></td><td>JSON</td><td>Headline numbers, regulator split, history flags, providers we couldn't read</td></tr>
+      <tr><td><a href="https://tradinglookup.com/data/cfd-loss-rates.datapackage.json">cfd-loss-rates.datapackage.json</a></td><td>Frictionless Data Package</td><td>Schema and licence</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>The sortable table, per-provider pages and charts live on the <a href="https://tradinglookup.com/brokers/cfd-loss-rates/">CFD loss-rate ledger</a>.</p>
+
+  <h2 id="crowd">2. Crowd Gauge (CFTC Commitments of Traders)</h2>
+  <p>Every Friday the CFTC publishes the positions held in US futures markets as of the previous Tuesday. Traders too small to report individually are grouped as "non-reportable". We use their long and short totals as a stand-in for the retail crowd, then ask one question per market: is this week's long share high or low compared with the last three years?</p>
+
+  <h3>What's in it (measured)</h3>
+  <ul>
+    <li>19 futures markets (stock indices, metals, energy, currencies, dollar index, bitcoin and ether), weekly since 6 January 2006; crypto from 5 April 2019.</li>
+    <li>Latest reading, data as of 9 October 2026: composite 65.62 out of 100, "leaning long".</li>
+    <li>A pre-registered backtest of whether extreme readings came before unusual returns, published with its result.</li>
+  </ul>
+
+  <h3>Files</h3>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>File</th><th>Format</th><th>Contents</th></tr></thead>
+    <tbody>
+      <tr><td><a href="https://tradinglookup.com/data/crowd-gauge-observations.csv">crowd-gauge-observations.csv</a></td><td>CSV, one row per contract per week</td><td>Raw CFTC non-reportable long and short, long share, 156-week percentile, flow percentile</td></tr>
+      <tr><td><a href="https://tradinglookup.com/data/crowd-gauge-history.csv">crowd-gauge-history.csv</a></td><td>CSV, one row per date per scope</td><td>Gauge readings for each market, the futures and crypto classes, and the composite</td></tr>
+      <tr><td><a href="https://tradinglookup.com/data/crowd-gauge-latest.json">crowd-gauge-latest.json</a></td><td>JSON</td><td>Latest readings with week-ago, year-ago and three-year range</td></tr>
+      <tr><td><a href="https://tradinglookup.com/data/crowd-fear-greed-history.csv">crowd-fear-greed-history.csv</a></td><td>CSV</td><td>Crowd Fear &amp; Greed readings (positioning level plus 4-week flow)</td></tr>
+      <tr><td><a href="https://tradinglookup.com/data/crowd-fear-greed-monthly.csv">crowd-fear-greed-monthly.csv</a></td><td>CSV</td><td>Monthly last, mean, low and high per scope</td></tr>
+      <tr><td><a href="https://tradinglookup.com/data/crowd-gauge-backtest.json">crowd-gauge-backtest.json</a></td><td>JSON</td><td>Backtest statistics and verdict</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2 id="method">Method in brief</h2>
+  <h3>CFD loss rates</h3>
+  <ol>
+    <li>Load each provider's site as a UK visitor sees it.</li>
+    <li>Accept a percentage only when the mandated warning wording follows it directly.</li>
+    <li>Block publication if any stored figure differs from the number in its own sentence (0 mismatches on 6 October 2026).</li>
+    <li>For history, read one Wayback Machine capture per quarter with the same rule; leave missing quarters empty.</li>
+    <li>Re-read later with an independent automated check that respects robots.txt and never overwrites the published figure.</li>
+  </ol>
+  <h3>Crowd Gauge</h3>
+  <ol>
+    <li>Pull the CFTC Legacy futures-only report from its public API (no key needed).</li>
+    <li>Long share = non-reportable long ÷ (long + short) × 100.</li>
+    <li>Date each value from its Friday release, three days after the Tuesday position date, so no reading uses data before the public had it.</li>
+    <li>Rank the long share against the same contract's last 156 weekly readings (ties count half; at least 52 needed).</li>
+    <li>Average to market, then class; the composite is 50% futures (S&amp;P 500, Nasdaq-100, gold, WTI crude, euro, yen) and 50% crypto (bitcoin, ether), fixed before the backtest.</li>
+    <li>Bands: 0–20 crowded short, 20–40 leaning short, 40–60 balanced, 60–80 leaning long, 80–100 crowded long.</li>
+  </ol>
+  <p>The full write-up, including the backtest table, is on the <a href="https://tradinglookup.com/data/crowd-gauge/method/">Crowd Gauge method page</a>. Column definitions for every file are in the <a href="codebook.html">codebook</a>.</p>
+
+  <h2 id="limits">Known limits</h2>
+  <ul>
+    <li><strong>CFD:</strong> regulators come from our own list and haven't been checked on the registers yet; two legal entities are unconfirmed; a loss rate describes a firm's clients as a group, not anyone's personal odds.</li>
+    <li><strong>Crowd Gauge:</strong> "non-reportable" includes some small firms, so it is a proxy for retail, not a count of it. Positions are three days old when released. A percentile is relative: 90 means more long than in 90% of the last three years, not that 90% of traders are long. CME quarterly roll weeks can produce one-week spikes in some currency contracts.</li>
+  </ul>
+
+  <h2 id="licence">Licence and credit</h2>
+  <p>Both datasets are released under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Commercial use is fine. Please credit "TradingLookup" and link to the source page. Other datasets we publish are listed in the <a href="https://tradinglookup.com/data/">open data hub</a>.</p>
+  <p>Spotted an error? Email <a href="mailto:hello@tradinglookup.com">hello@tradinglookup.com</a>.</p>
+</main>
+
+<footer>
+  <p>Figures on this page are measured from the files as published (CFD data as of 6 October 2026; Crowd Gauge data as of 9 October 2026). Information about public disclosures and positioning data, not investment advice.</p>
+</footer>
+</body>
+</html>
