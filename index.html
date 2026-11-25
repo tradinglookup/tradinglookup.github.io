@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TradingLookup open datasets: 24 public files, CC BY 4.0</title>
-<meta name="description" content="24 free CC BY 4.0 datasets from TradingLookup, including CFD providers' own retail loss-rate disclosures, a weekly small-trader positioning gauge built from CFTC Commitments of Traders data, and ledgers for prop firms, brokers and crypto exchanges.">
+<title>TradingLookup open datasets: 38 public files, CC BY 4.0</title>
+<meta name="description" content="38 free CC BY 4.0 datasets from TradingLookup, including CFD providers' own retail loss-rate disclosures, a weekly small-trader positioning gauge built from CFTC Commitments of Traders data, ledgers for prop firms, brokers and crypto exchanges, and official-source market data tools.">
 <link rel="canonical" href="https://tradinglookup.github.io/">
 <style>
   :root { --ink: #1b1f24; --muted: #57606a; --line: #d0d7de; --bg: #ffffff; --soft: #f6f8fa; --link: #0b57d0; }
@@ -40,9 +40,9 @@
 </header>
 
 <main>
-  <p>We publish 24 public datasets as free, machine-readable files under CC BY 4.0. Two of them are written up in detail below: the loss figures that CFD providers are required to print about their own retail clients, and a weekly 0 to 100 reading of how heavily small traders lean long or short, built from the US futures regulator's Commitments of Traders report. The other 22 are listed after that, each with a short description and a link to its page on tradinglookup.com. Every row says where it came from and when.</p>
+  <p>We publish 38 public datasets as free, machine-readable files under CC BY 4.0. Two of them are written up in detail below: the loss figures that CFD providers are required to print about their own retail clients, and a weekly 0 to 100 reading of how heavily small traders lean long or short, built from the US futures regulator's Commitments of Traders report. The rest are listed after that, each with a short description and a link to its page or file on tradinglookup.com. Every row says where it came from and when.</p>
 
-  <h2 id="catalog">The 24 datasets</h2>
+  <h2 id="catalog">The 38 datasets</h2>
   <ol class="catalog">
     <li><a href="#cfd">CFD loss rates</a></li>
     <li><a href="#crowd">Crowd Gauge (CFTC Commitments of Traders)</a></li>
@@ -68,6 +68,20 @@
     <li><a href="#rbi-alert-list">RBI Alert List</a></li>
     <li><a href="#trading-journals">Trading journals comparison</a></li>
     <li><a href="#india-brokerage">India brokerage charges</a></li>
+    <li><a href="#brokers-forex">Forex and CFD Broker Ledger</a></li>
+    <li><a href="#changes">Data change log</a></li>
+    <li><a href="#prop-firms-cost-per-payout">Cost per payout</a></li>
+    <li><a href="#prop-firms-payout-proof">Payout Proof</a></li>
+    <li><a href="#yield-curve">US yield curve inversion tracker</a></li>
+    <li><a href="#five-year-treasury-yield">5-year Treasury yield</a></li>
+    <li><a href="#ten-year-treasury-yield">10-year Treasury yield</a></li>
+    <li><a href="#inflation-real-rates">US inflation and real rates</a></li>
+    <li><a href="#fed-rate-history">Fed funds target rate history</a></li>
+    <li><a href="#crypto-correlation-matrix">Crypto and markets correlation matrix</a></li>
+    <li><a href="#stablecoin-supply">On-chain stablecoin supply</a></li>
+    <li><a href="#state-of-retail-cfd-losses">State of retail CFD losses</a></li>
+    <li><a href="#prop-firm-price-index">Prop Firm Price Index, November 2026</a></li>
+    <li><a href="#state-of-prop-firms">State of prop firms</a></li>
   </ol>
 
   <h2 id="cfd">1. CFD loss rates</h2>
@@ -102,7 +116,7 @@
   <h3>What's in it (measured)</h3>
   <ul>
     <li>19 futures markets (stock indices, metals, energy, currencies, dollar index, bitcoin and ether), weekly since 6 January 2006; crypto from 5 April 2019.</li>
-    <li>Latest reading, data as of 9 October 2026: composite 65.62 out of 100, "leaning long".</li>
+    <li>Latest reading, data as of 20 November 2026: composite 34.4 out of 100, shown as 34/100 on the Crowd Gauge page, "leaning short".</li>
     <li>A pre-registered backtest of whether extreme readings came before unusual returns, published with its result.</li>
   </ul>
 
@@ -236,13 +250,69 @@
   <p>Brokerage and statutory charges used by our India brokerage calculator, from each broker's and regulator's own pages.</p>
   <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/#india-brokerage">tradinglookup.com/data/#india-brokerage</a>.</p>
 
+  <h2 id="brokers-forex">25. Forex and CFD Broker Ledger</h2>
+  <p>Minimum deposit, maximum leverage, spreads, platforms and swap-free accounts at 24 forex and CFD brokers, from their own pages.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/fx-brokers.csv">tradinglookup.com/data/fx-brokers.csv</a>.</p>
+
+  <h2 id="changes">26. Data change log</h2>
+  <p>Every value that changed when we re-read our sources each week: prop firm rules and prices, exchange access, UK licences, release dates. Old next to new.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/changes/">tradinglookup.com/data/changes/</a>.</p>
+
+  <h2 id="prop-firms-cost-per-payout">27. Cost per payout</h2>
+  <p>For futures prop firms that publish both an evaluation pass rate and a funded-to-payout rate and state a 50K route to a funded account: attempts per funded account (1 / pass rate), implied evaluation-fee spend per funded account, and implied spend per trader who receives at least one payout. Inputs are the firms' own figures with their quotes; the outputs are our arithmetic.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/futures-prop-us-summary.json">tradinglookup.com/data/futures-prop-us-summary.json</a> and <a href="https://tradinglookup.com/data/prop-calculator-presets.json">tradinglookup.com/data/prop-calculator-presets.json</a>.</p>
+
+  <h2 id="prop-firms-payout-proof">28. Payout Proof</h2>
+  <p>For 50 prop trading firms: the payout totals and payout rates each firm prints on its own site, the payouts an independent tracker counts on public blockchains, and dated press reports about payouts, each quoted word for word with its source page, read date and the SHA-256 of the saved page text. Firms are listed A to Z and are not ranked.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/payout-proof.csv">tradinglookup.com/data/payout-proof.csv</a>.</p>
+
+  <h2 id="yield-curve">29. US yield curve inversion tracker</h2>
+  <p>Daily US Treasury 3-month, 2-year and 10-year constant-maturity yields (Federal Reserve H.15), the 10-year minus 2-year and 10-year minus 3-month spreads, and every run of consecutive days with an inverted curve since 1976.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/yield-curve/">tradinglookup.com/data/yield-curve/</a>.</p>
+
+  <h2 id="five-year-treasury-yield">30. 5-year Treasury yield</h2>
+  <p>Daily US 5-year Treasury constant-maturity yield (Federal Reserve H.15, DGS5) since 1962.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/5-year-treasury-yield/">tradinglookup.com/data/5-year-treasury-yield/</a>.</p>
+
+  <h2 id="ten-year-treasury-yield">31. 10-year Treasury yield</h2>
+  <p>Daily US 10-year Treasury constant-maturity yield (Federal Reserve H.15, DGS10) since 1962.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/10-year-treasury-yield/">tradinglookup.com/data/10-year-treasury-yield/</a>.</p>
+
+  <h2 id="inflation-real-rates">32. US inflation and real rates</h2>
+  <p>Monthly US CPI and PCE inflation (headline and core, percent change on a year earlier) and daily 10-year nominal, real (TIPS) and breakeven yields, computed from official series.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/inflation-real-rates/">tradinglookup.com/data/inflation-real-rates/</a>.</p>
+
+  <h2 id="fed-rate-history">33. Fed funds target rate history</h2>
+  <p>Every change in the Federal Reserve's federal funds target since January 1994: date effective, target or range, and size of the change.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/fed-rate-history/">tradinglookup.com/data/fed-rate-history/</a>.</p>
+
+  <h2 id="crypto-correlation-matrix">34. Crypto and markets correlation matrix</h2>
+  <p>Pearson correlations of daily changes between bitcoin, ether, the broad US dollar index, the 10-year Treasury yield, the 10-year real yield and WTI oil, over 90 and 250 trading days, plus a monthly rolling series since 2018.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/crypto-correlation-matrix/">tradinglookup.com/data/crypto-correlation-matrix/</a>.</p>
+
+  <h2 id="stablecoin-supply">35. On-chain stablecoin supply</h2>
+  <p>Total supply, by reading date, of natively issued US dollar stablecoin contracts (USDT, USDC, USDS, USDe, DAI, PYUSD, RLUSD, FDUSD) on 8 blockchains, read from each contract.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/stablecoin-supply/">tradinglookup.com/data/stablecoin-supply/</a>.</p>
+
+  <h2 id="state-of-retail-cfd-losses">36. State of retail CFD losses</h2>
+  <p>Aggregates of the CFD loss-rate series: the median, spread and regulator split of the loss figures CFD providers state on their own risk warnings, and the median archived figure per quarter since 2018.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/state-of-retail-cfd-losses/">tradinglookup.com/data/state-of-retail-cfd-losses/</a>.</p>
+
+  <h2 id="prop-firm-price-index">37. Prop Firm Price Index, November 2026</h2>
+  <p>Median cost to reach a funded $50,000 US futures prop account, across firms in the US Futures Prop Access Ledger: evaluation price plus activation fee, cheapest stated route per firm, from each firm's own website.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/prop-firm-price-index/2026-11/">tradinglookup.com/data/prop-firm-price-index/2026-11/</a>.</p>
+
+  <h2 id="state-of-prop-firms">38. State of prop firms</h2>
+  <p>Aggregates of TradingLookup's prop firm ledgers: published pass and payout rates, median evaluation prices, US access statements and how many key terms firms state.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/state-of-prop-firms/">tradinglookup.com/data/state-of-prop-firms/</a>.</p>
+
   <h2 id="licence">License and credit</h2>
-  <p>All 24 datasets are released under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Commercial use is fine. Please credit "TradingLookup" and link to the source page. The full catalog, file downloads and data tools are on the <a href="https://tradinglookup.com/data/">open data hub</a>.</p>
+  <p>All 38 datasets are released under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Commercial use is fine. Please credit "TradingLookup" and link to the source page. The full catalog, file downloads and data tools are on the <a href="https://tradinglookup.com/data/">open data hub</a>.</p>
   <p>Spotted an error? Email <a href="mailto:hello@tradinglookup.com">hello@tradinglookup.com</a>.</p>
 </main>
 
 <footer>
-  <p>Figures in the CFD and Crowd Gauge sections are measured from the files as published (CFD data as of 6 October 2026; Crowd Gauge data as of 9 October 2026). Information about public disclosures and positioning data, not investment advice.</p>
+  <p>Figures in the CFD and Crowd Gauge sections are measured from the files as published (CFD data as of 6 October 2026; Crowd Gauge data as of 20 November 2026, from crowd-gauge-latest.json and the Crowd Gauge page). Information about public disclosures and positioning data, not investment advice.</p>
 </footer>
 </body>
 </html>
