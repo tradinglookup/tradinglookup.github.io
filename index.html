@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TradingLookup open datasets: CFD loss rates and Crowd Gauge</title>
-<meta name="description" content="Two free CC BY 4.0 datasets: CFD providers' own retail loss-rate disclosures, and a weekly small-trader positioning gauge built from CFTC Commitments of Traders data.">
+<title>TradingLookup open datasets: 24 public files, CC BY 4.0</title>
+<meta name="description" content="24 free CC BY 4.0 datasets from TradingLookup, including CFD providers' own retail loss-rate disclosures, a weekly small-trader positioning gauge built from CFTC Commitments of Traders data, and ledgers for prop firms, brokers and crypto exchanges.">
 <link rel="canonical" href="https://tradinglookup.github.io/">
 <style>
   :root { --ink: #1b1f24; --muted: #57606a; --line: #d0d7de; --bg: #ffffff; --soft: #f6f8fa; --link: #0b57d0; }
@@ -27,6 +27,8 @@
   th { background: var(--soft); }
   code { background: var(--soft); padding: 1px 4px; border-radius: 4px; font-size: 0.9em; }
   .note { background: var(--soft); border-left: 3px solid var(--line); padding: 8px 12px; }
+  .catalog { margin: 0; padding-left: 20px; }
+  .catalog li { margin: 4px 0; }
   footer { color: var(--muted); font-size: 0.85rem; padding-top: 24px; padding-bottom: 40px; }
 </style>
 </head>
@@ -38,7 +40,35 @@
 </header>
 
 <main>
-  <p>We publish two datasets that people keep asking for in machine-readable form. The first gathers the loss figures that CFD providers are required to print about their own retail clients. The second turns the US futures regulator's weekly positioning report into a 0 to 100 reading of how heavily small traders lean long or short. Both are rebuilt by scripts from public sources, and every row says where it came from and when.</p>
+  <p>We publish 24 public datasets as free, machine-readable files under CC BY 4.0. Two of them are written up in detail below: the loss figures that CFD providers are required to print about their own retail clients, and a weekly 0 to 100 reading of how heavily small traders lean long or short, built from the US futures regulator's Commitments of Traders report. The other 22 are listed after that, each with a short description and a link to its page on tradinglookup.com. Every row says where it came from and when.</p>
+
+  <h2 id="catalog">The 24 datasets</h2>
+  <ol class="catalog">
+    <li><a href="#cfd">CFD loss rates</a></li>
+    <li><a href="#crowd">Crowd Gauge (CFTC Commitments of Traders)</a></li>
+    <li><a href="#uk-crypto-licence-tracker">UK crypto licence tracker</a></li>
+    <li><a href="#prop-firm-published-rates">Prop firm pass and payout rates</a></li>
+    <li><a href="#futures-prop-us">US Futures Prop Access Ledger</a></li>
+    <li><a href="#prop-fine-print">Fine Print Index (futures prop firms)</a></li>
+    <li><a href="#prop-country-access">Prop Firm Country Check (futures prop firms)</a></li>
+    <li><a href="#prop-forex">Forex Prop Firm Ledger</a></li>
+    <li><a href="#prop-crypto">Crypto Prop Firm Ledger</a></li>
+    <li><a href="#prop-stocks">Stocks and Options Prop Firm Ledger</a></li>
+    <li><a href="#us-crypto-state-access">US Crypto State Access</a></li>
+    <li><a href="#crypto-perps">Crypto Perps Ledger</a></li>
+    <li><a href="#crypto-exchange-fees">Crypto Exchange Fees Ledger</a></li>
+    <li><a href="#stock-brokers">Stock Broker Ledger</a></li>
+    <li><a href="#retail-trader-pulse">US Retail Trader Pulse</a></li>
+    <li><a href="#prediction-markets">Prediction Market Checker</a></li>
+    <li><a href="#prop-news-rules">Prop Firm News Rules</a></li>
+    <li><a href="#economic-calendar">Economic calendar</a></li>
+    <li><a href="#market-hours">Exchange hours</a></li>
+    <li><a href="#market-holidays">Market holidays</a></li>
+    <li><a href="#prop-calculator-presets">Prop calculator presets</a></li>
+    <li><a href="#rbi-alert-list">RBI Alert List</a></li>
+    <li><a href="#trading-journals">Trading journals comparison</a></li>
+    <li><a href="#india-brokerage">India brokerage charges</a></li>
+  </ol>
 
   <h2 id="cfd">1. CFD loss rates</h2>
   <p>Firms offering CFDs to retail clients in the UK and EU must state what share of those clients' accounts lost money over the past year. We read that sentence from each provider's own website, from a UK connection, and store it word for word with the date, the page address and a SHA-256 fingerprint of the page text. A second table rebuilds each provider's figure quarter by quarter from Internet Archive captures.</p>
@@ -64,7 +94,7 @@
     </tbody>
   </table>
   </div>
-  <p>The sortable table, per-provider pages and charts live on the <a href="https://tradinglookup.com/brokers/cfd-loss-rates/">CFD loss-rate ledger</a>.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/#cfd-loss-rates">tradinglookup.com/data/#cfd-loss-rates</a>. The sortable table, per-provider pages and charts live on the <a href="https://tradinglookup.com/brokers/cfd-loss-rates/">CFD loss-rate ledger</a>.</p>
 
   <h2 id="crowd">2. Crowd Gauge (CFTC Commitments of Traders)</h2>
   <p>Every Friday the CFTC publishes the positions held in US futures markets as of the previous Tuesday. Traders too small to report individually are grouped as "non-reportable". We use their long and short totals as a stand-in for the retail crowd, then ask one question per market: is this week's long share high or low compared with the last three years?</p>
@@ -90,6 +120,7 @@
     </tbody>
   </table>
   </div>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/crowd-gauge/">tradinglookup.com/data/crowd-gauge/</a>.</p>
 
   <h2 id="method">Method in brief</h2>
   <h3>CFD loss rates</h3>
@@ -109,7 +140,7 @@
     <li>Average to market, then class; the composite is 50% futures (S&amp;P 500, Nasdaq-100, gold, WTI crude, euro, yen) and 50% crypto (bitcoin, ether), fixed before the backtest.</li>
     <li>Bands: 0–20 crowded short, 20–40 leaning short, 40–60 balanced, 60–80 leaning long, 80–100 crowded long.</li>
   </ol>
-  <p>The full write-up, including the backtest table, is on the <a href="https://tradinglookup.com/data/crowd-gauge/method/">Crowd Gauge method page</a>. Column definitions for every file are in the <a href="codebook.html">codebook</a>.</p>
+  <p>The full write-up, including the backtest table, is on the <a href="https://tradinglookup.com/data/crowd-gauge/method/">Crowd Gauge method page</a>. Column definitions for the CFD and Crowd Gauge files are in the <a href="codebook.html">codebook</a>.</p>
 
   <h2 id="limits">Known limits</h2>
   <ul>
@@ -117,13 +148,101 @@
     <li><strong>Crowd Gauge:</strong> "non-reportable" includes some small firms, so it is a proxy for retail, not a count of it. Positions are three days old when released. A percentile is relative: 90 means more long than in 90% of the last three years, not that 90% of traders are long. CME quarterly roll weeks can produce one-week spikes in some currency contracts.</li>
   </ul>
 
-  <h2 id="licence">Licence and credit</h2>
-  <p>Both datasets are released under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Commercial use is fine. Please credit "TradingLookup" and link to the source page. Other datasets we publish are listed in the <a href="https://tradinglookup.com/data/">open data hub</a>.</p>
+  <h2 id="uk-crypto-licence-tracker">3. UK crypto licence tracker</h2>
+  <p>Which crypto platforms UK consumers use are on the FCA's cryptoasset register, with FCA notices and the platforms' own statements.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/#uk-crypto-licence-tracker">tradinglookup.com/data/#uk-crypto-licence-tracker</a>.</p>
+
+  <h2 id="prop-firm-published-rates">4. Prop firm pass and payout rates</h2>
+  <p>Every pass, payout and move-to-live rate a prop firm prints on its own site, quoted with its period and base. Not comparable across firms and never ranked.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/#prop-firm-published-rates">tradinglookup.com/data/#prop-firm-published-rates</a>.</p>
+
+  <h2 id="futures-prop-us">5. US Futures Prop Access Ledger</h2>
+  <p>Which futures prop firms say they serve US traders, with prices, activation fees, payout terms, platforms and stated regulatory status. Each value has the firm's quote and source. Promo codes removed.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/#futures-prop-us">tradinglookup.com/data/#futures-prop-us</a>.</p>
+
+  <h2 id="prop-fine-print">6. Fine Print Index (futures prop firms)</h2>
+  <p>For each firm in the ledger, whether 16 key terms (fees, drawdown, payouts, entity, outcome rates) are stated on its pages. A mechanical count, equal weight.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/#prop-fine-print">tradinglookup.com/data/#prop-fine-print</a>.</p>
+
+  <h2 id="prop-country-access">7. Prop Firm Country Check (futures prop firms)</h2>
+  <p>For each firm in the ledger, what its own restricted-country list says about India, Pakistan, Nigeria, South Africa and Kenya.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/#prop-country-access">tradinglookup.com/data/#prop-country-access</a>.</p>
+
+  <h2 id="prop-forex">8. Forex Prop Firm Ledger</h2>
+  <p>Plan prices and rules for forex prop firms (target, loss limits, profit split, platforms) and who they accept, each with the firm's quote and source.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/#prop-forex">tradinglookup.com/data/#prop-forex</a>.</p>
+
+  <h2 id="prop-crypto">9. Crypto Prop Firm Ledger</h2>
+  <p>Plan prices and rules for crypto prop firms (target, loss limits, profit split, platforms) and who they accept, each with the firm's quote and source.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/#prop-crypto">tradinglookup.com/data/#prop-crypto</a>.</p>
+
+  <h2 id="prop-stocks">10. Stocks and Options Prop Firm Ledger</h2>
+  <p>Plan prices and rules for stocks and options prop firms (target, loss limits, profit split, platforms) and who they accept, each with the firm's quote and source.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/#prop-stocks">tradinglookup.com/data/#prop-stocks</a>.</p>
+
+  <h2 id="us-crypto-state-access">11. US Crypto State Access</h2>
+  <p>Which US states and territories each crypto exchange or app says it serves, in its own words.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/#us-crypto-state-access">tradinglookup.com/data/#us-crypto-state-access</a>.</p>
+
+  <h2 id="crypto-perps">12. Crypto Perps Ledger</h2>
+  <p>Fees, maximum leverage, funding interval and who each crypto exchange accepts for perpetual futures, from the exchanges' own pages.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/#crypto-perps">tradinglookup.com/data/#crypto-perps</a>.</p>
+
+  <h2 id="crypto-exchange-fees">13. Crypto Exchange Fees Ledger</h2>
+  <p>Spot maker and taker fees at the base tier, plus what buying, depositing and withdrawing cost, from each exchange's own fee pages.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/#crypto-exchange-fees">tradinglookup.com/data/#crypto-exchange-fees</a>.</p>
+
+  <h2 id="stock-brokers">14. Stock Broker Ledger</h2>
+  <p>Share commissions, currency conversion, account fees and the investor protection scheme each stock broker names, from the brokers' own pages.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/#stock-brokers">tradinglookup.com/data/#stock-brokers</a>.</p>
+
+  <h2 id="retail-trader-pulse">15. US Retail Trader Pulse</h2>
+  <p>CFTC data only: US retail forex money at CFTC-registered firms (monthly) and small traders' positions in seven micro futures contracts (weekly COT).</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/retail-trader-pulse/">tradinglookup.com/data/retail-trader-pulse/</a>.</p>
+
+  <h2 id="prediction-markets">16. Prediction Market Checker</h2>
+  <p>What US prediction markets say about state availability, fees and payments, plus the state, court and federal actions on official pages.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/#prediction-markets">tradinglookup.com/data/#prediction-markets</a>.</p>
+
+  <h2 id="prop-news-rules">17. Prop Firm News Rules</h2>
+  <p>What each prop firm's own pages say about trading around high-impact news.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/#prop-news-rules">tradinglookup.com/data/#prop-news-rules</a>.</p>
+
+  <h2 id="economic-calendar">18. Economic calendar</h2>
+  <p>Release dates and times for central-bank decisions and major data, from the publishers' own pages.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/#economic-calendar">tradinglookup.com/data/#economic-calendar</a>.</p>
+
+  <h2 id="market-hours">19. Exchange hours</h2>
+  <p>Trading hours for the exchanges on our market clock, from the exchanges' own pages.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/#market-hours">tradinglookup.com/data/#market-hours</a>.</p>
+
+  <h2 id="market-holidays">20. Market holidays</h2>
+  <p>Exchange holidays and early closes, from the exchanges' own pages.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/#market-holidays">tradinglookup.com/data/#market-holidays</a>.</p>
+
+  <h2 id="prop-calculator-presets">21. Prop calculator presets</h2>
+  <p>The account rules our prop firm calculators start from, each with the firm's quote and source.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/#prop-calculator-presets">tradinglookup.com/data/#prop-calculator-presets</a>.</p>
+
+  <h2 id="rbi-alert-list">22. RBI Alert List</h2>
+  <p>The Reserve Bank of India's Alert List of unauthorised forex platforms, saved from the RBI's own page.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/#rbi-alert-list">tradinglookup.com/data/#rbi-alert-list</a>.</p>
+
+  <h2 id="trading-journals">23. Trading journals comparison</h2>
+  <p>Prices and features of trading journal software, from each vendor's own pages.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/#trading-journals">tradinglookup.com/data/#trading-journals</a>.</p>
+
+  <h2 id="india-brokerage">24. India brokerage charges</h2>
+  <p>Brokerage and statutory charges used by our India brokerage calculator, from each broker's and regulator's own pages.</p>
+  <p>License: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source: <a href="https://tradinglookup.com/data/#india-brokerage">tradinglookup.com/data/#india-brokerage</a>.</p>
+
+  <h2 id="licence">License and credit</h2>
+  <p>All 24 datasets are released under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Commercial use is fine. Please credit "TradingLookup" and link to the source page. The full catalog, file downloads and data tools are on the <a href="https://tradinglookup.com/data/">open data hub</a>.</p>
   <p>Spotted an error? Email <a href="mailto:hello@tradinglookup.com">hello@tradinglookup.com</a>.</p>
 </main>
 
 <footer>
-  <p>Figures on this page are measured from the files as published (CFD data as of 6 October 2026; Crowd Gauge data as of 9 October 2026). Information about public disclosures and positioning data, not investment advice.</p>
+  <p>Figures in the CFD and Crowd Gauge sections are measured from the files as published (CFD data as of 6 October 2026; Crowd Gauge data as of 9 October 2026). Information about public disclosures and positioning data, not investment advice.</p>
 </footer>
 </body>
 </html>
